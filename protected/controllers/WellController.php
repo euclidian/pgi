@@ -68,16 +68,24 @@ class WellController extends Controller
 	public function actionCreate()
 	{
 		$model=new Well;
-
+		$active = new Active;
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Well']))
 		{
 			$model->attributes=$_POST['Well'];
-			$model->last_update = date("Y-m-d");
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->last_update = date("Y-m-d");			
+			if($model->save()){
+				$active->id_well = $model->id;
+				$active->active = $model->active;
+				$active->change_date = $model->last_update;
+				$active->note = $model->note;
+				$active->production = $model->production;
+				if($active->save())
+					$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -93,15 +101,20 @@ class WellController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		$active = new Active;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Well']))
 		{
 			$model->attributes=$_POST['Well'];
-			$model->last_update = date("Y-m-d");
-			if($model->save())
+			$model->last_update = date("Y-m-d");			
+			$active->id_well = $model->id;
+			$active->active = $model->active;
+			$active->change_date = $model->last_update;
+			$active->note = $model->note;
+			$active->production = $model->production;			
+			if($model->save() && $active->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
