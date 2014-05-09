@@ -91,6 +91,23 @@ class AtributWell extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function searchIDWell($id_well)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('value',$this->value,true);
+		$criteria->compare('id_well',$this->id_well);
+		$criteria->addcondition('id_well = ' . $id_well);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 
 	/**
 	 * Returns the static model of the specified AR class.

@@ -51,8 +51,13 @@ class WellController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model2=new AtributWell('search');
+		$model2->unsetAttributes();  // clear any default values
+		if(isset($_GET['AtributWell']))
+			$model2->attributes=$_GET['AtributWell'];
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$this->loadModel($id),'model2'=>$model2,
 		));
 	}
 
@@ -98,8 +103,13 @@ class WellController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		$model2=new AtributWell('search');
+		$model2->unsetAttributes();  // clear any default values
+		if(isset($_GET['AtributWell']))
+			$model2->attributes=$_GET['AtributWell'];
+
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'model2'=>$model2,
 		));
 	}
 

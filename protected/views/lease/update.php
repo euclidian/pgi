@@ -23,14 +23,14 @@ $this->menu=array(
 <br/>
 <br/>
 <br/>
-Atribut Tambahan
+Attributes
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'atribut-lease-grid',
 	'dataProvider'=>$model2->searchIDLease($model->id_lease),
 	'filter'=>$model2,
 	// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
-		// 'id',
+		'id',
 		'name',
 		'value',
 		'id_lease',
@@ -59,3 +59,5 @@ Atribut Tambahan
 	'summaryText'=>'',
 	'emptyText'=>'',
 )); ?>
+
+<?php echo CHtml::Link('Create new attribute',array('atributlease/create')); ?> 
