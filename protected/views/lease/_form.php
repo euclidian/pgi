@@ -31,6 +31,12 @@
 		<?php echo $form->error($model,'id_lease'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'last_update'); ?>
+		<?php echo $form->textField($model,'last_update'); ?>
+		<?php echo $form->error($model,'last_update'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

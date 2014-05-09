@@ -33,5 +33,11 @@
 	<?php echo CHtml::encode($data->id_lease); ?>
 	<br />
 
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('last_update')); ?>:</b>
+	<?php echo CHtml::encode($data->last_update); ?>
+	<br />
+
+	*/ ?>
 
 </div>

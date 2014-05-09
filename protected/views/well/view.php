@@ -28,5 +28,6 @@ $this->menu=array(
 		'production',
 		'note',
 		'id_lease',
+		'last_update',
 	),
 )); ?>

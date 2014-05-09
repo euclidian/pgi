@@ -55,7 +55,7 @@ class LeaseController extends Controller
 		$model2->unsetAttributes();  // clear any default values
 		if(isset($_GET['AtributLease']))
 			$model2->attributes=$_GET['AtributLease'];
-
+			
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),'model2'=>$model2,
 		));
@@ -103,8 +103,13 @@ class LeaseController extends Controller
 				$this->redirect(array('view','id'=>$model->id_lease));
 		}
 
+		$model2=new AtributLease('search');		
+		$model2->unsetAttributes();  // clear any default values
+		if(isset($_GET['AtributLease']))
+			$model2->attributes=$_GET['AtributLease'];
+
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'model2'=>$model2,
 		));
 	}
 

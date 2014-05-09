@@ -31,6 +31,16 @@
 		<?php echo $form->textField($model,'change_date'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'note'); ?>
+		<?php echo $form->textField($model,'note',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'production'); ?>
+		<?php echo $form->textField($model,'production',array('size'=>60,'maxlength'=>65)); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

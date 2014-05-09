@@ -6,6 +6,7 @@
  * The followings are the available columns in table '{{lease}}':
  * @property string $name
  * @property string $id_lease
+ * @property string $last_update
  *
  * The followings are the available model relations:
  * @property Well[] $wells
@@ -28,11 +29,11 @@ class Lease extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_lease', 'required'),
+			array('id_lease, last_update', 'required'),
 			array('name, id_lease', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('name, id_lease', 'safe', 'on'=>'search'),
+			array('name, id_lease, last_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +57,7 @@ class Lease extends CActiveRecord
 		return array(
 			'name' => 'Name',
 			'id_lease' => 'Id Lease',
+			'last_update' => 'Last Update',
 		);
 	}
 
@@ -79,6 +81,7 @@ class Lease extends CActiveRecord
 
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('id_lease',$this->id_lease,true);
+		$criteria->compare('last_update',$this->last_update,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

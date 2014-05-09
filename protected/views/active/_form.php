@@ -37,6 +37,18 @@
 		<?php echo $form->error($model,'change_date'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'note'); ?>
+		<?php echo $form->textField($model,'note',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'note'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'production'); ?>
+		<?php echo $form->textField($model,'production',array('size'=>60,'maxlength'=>65)); ?>
+		<?php echo $form->error($model,'production'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
