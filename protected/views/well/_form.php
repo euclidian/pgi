@@ -1,7 +1,7 @@
 <?php
 /* @var $this WellController */
 /* @var $model Well */
-/* @var $form CActiveForm */
+/* @var $form CActiveForm */	
 ?>
 
 <div class="form">
@@ -33,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'active'); ?>
-		<?php echo $form->textField($model,'active'); ?>
+		<?php echo $form->dropDownList($model,'active',array('0','1'));?>		
 		<?php echo $form->error($model,'active'); ?>
 	</div>
 
@@ -51,7 +51,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_lease'); ?>
-		<?php echo $form->textField($model,'id_lease',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->dropDownList($model,'id_lease',CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'),array('empty'=>'-----Pilih Lease-----'));?>
 		<?php echo $form->error($model,'id_lease'); ?>
 	</div>	
 

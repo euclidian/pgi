@@ -21,21 +21,29 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'id_well'); ?>
-		<?php echo $form->textField($model,'id_well'); ?>
+		<?php echo $form->dropDownList($model,'id_well',CHtml::listData(Well::model()->findAll(), 'id', 'name'),array('empty'=>'-----Pilih Well-----'));?>
 		<?php echo $form->error($model,'id_well'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'active'); ?>
-		<?php echo $form->textField($model,'active'); ?>
+		<?php echo $form->dropDownList($model,'active',array('0','1'));?>		
 		<?php echo $form->error($model,'active'); ?>
 	</div>
-
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'change_date'); ?>
-		<?php echo $form->textField($model,'change_date'); ?>
+		<?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+			'model'=>$model,
+			'attribute'=>'change_date',
+			'value'=>$model->change_date,
+			// 'htmlOptions'=>array('size'=>56),
+			'options'=>array(
+				'dateFormat'=>'y-m-d',
+			),
+		));?>
 		<?php echo $form->error($model,'change_date'); ?>
-	</div>
+	</div>	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'note'); ?>
