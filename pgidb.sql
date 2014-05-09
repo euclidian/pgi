@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 02, 2014 at 07:24 PM
+-- Generation Time: May 09, 2014 at 07:53 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -19,6 +19,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `pgidb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_active`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_active` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `id_well` int(255) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `change_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_well` (`id_well`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `tbl_active`
+--
+
+INSERT INTO `tbl_active` (`id`, `id_well`, `active`, `change_date`) VALUES
+(1, 2, 1, '2014-05-05'),
+(2, 2, 0, '2014-05-08'),
+(3, 3, 1, '2014-05-04'),
+(4, 3, 1, '2014-05-06'),
+(5, 2, 1, '2014-05-10'),
+(6, 2, 0, '2014-05-13'),
+(7, 2, 1, '2014-05-14'),
+(8, 2, 0, '2014-05-17');
 
 -- --------------------------------------------------------
 
@@ -99,7 +128,8 @@ CREATE TABLE IF NOT EXISTS `tbl_profiles` (
 
 INSERT INTO `tbl_profiles` (`user_id`, `lastname`, `firstname`, `birthday`) VALUES
 (1, 'Admin', 'Administrator', '0000-00-00'),
-(2, 'Demo', 'Demo', '0000-00-00');
+(2, 'Demo', 'Demo', '0000-00-00'),
+(3, 'guest', 'Guest', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -158,15 +188,16 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`),
   KEY `superuser` (`superuser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tbl_users`
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES
-(1, 'admin', '2e150ece3d6d6d3da8fe0f9ba3ecc0d1', 'webmaster@example.com', '3530c29b9f63ed1747e94b7c978d4f0b', 1261146094, 1399046148, 1, 1),
-(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '099f825543f7850cc038b90aaff39fac', 1261146096, 0, 0, 1);
+(1, 'admin', '2e150ece3d6d6d3da8fe0f9ba3ecc0d1', 'webmaster@example.com', '3530c29b9f63ed1747e94b7c978d4f0b', 1261146094, 1399463086, 1, 1),
+(2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '099f825543f7850cc038b90aaff39fac', 1261146096, 1399463069, 0, 1),
+(3, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'guest@guest.guest', '3d463a0e8185578ebf78754987328a52', 1399463029, 1399463029, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -184,18 +215,25 @@ CREATE TABLE IF NOT EXISTS `tbl_well` (
   `id_lease` bigint(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_lease` (`id_lease`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tbl_well`
 --
 
 INSERT INTO `tbl_well` (`id`, `name`, `api`, `active`, `production`, `note`, `id_lease`) VALUES
-(2, 'dasd', 'asd', 1, 'asd', 'das', 1);
+(2, 'dasd', 'asd', 1, 'asd', 'das', 1),
+(3, 'sumur 1', 'asdasd', 1, 'adsada', 'asdad', 1);
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_active`
+--
+ALTER TABLE `tbl_active`
+  ADD CONSTRAINT `tbl_active_ibfk_1` FOREIGN KEY (`id_well`) REFERENCES `tbl_well` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_atribut_lease`

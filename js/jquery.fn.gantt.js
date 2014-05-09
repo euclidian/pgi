@@ -1,101 +1,27 @@
-<?php
-/* @var $this SiteController */
+// jQuery Gantt Chart
+// ==================
 
-$this->pageTitle=Yii::app()->name;
-?>
-<link href="css/style.css" type="text/css" rel="stylesheet">
+// Basic usage:
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+//      $(".selector").gantt({
+//          source: "ajax/data.json",
+//          scale: "weeks",
+//          minScale: "weeks",
+//          maxScale: "months",
+//          onItemClick: function(data) {
+//              alert("Item clicked - show some details");
+//          },
+//          onAddClick: function(dt, rowId) {
+//              alert("Empty space clicked - add an item!");
+//          },
+//          onRender: function() {
+//              console.log("chart rendered");
+//          }
+//      });
 
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
-
-<div class="contain">
-	<div class="gantt"></div>
-</div>
-
-<script src="js/jquery.min.js"></script>
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/prettify.js"></script>
-  <script>
-		$(function() {
-
-			"use strict";
-
-			$(".gantt").gantt({
-				source: [
-				<?php 
-				$wellModel = Well::model()->findAll();
-				
-				for($k=0;$k<count($wellModel);$k++){
-					$active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
-					for($l=0;$l<count($active)-1;$l++){
-						if($active[$l]->active == 1){	
-							echo "{";
-								echo "name: \"".$wellModel[$k]->name."\",";
-							
-								echo "values: [{
-									from: \"". $active[$l]->change_date ."\",
-									to: \"". $active[$l+1]->change_date ."\",
-									// label: \"Requisdrement Gathering\",
-									customClass: \"ganttBlue\"
-								}]";									
-							echo "},";
-						}else{
-							echo "{";
-								echo "name: \"".$wellModel[$k]->name."\",";
-							
-								echo "values: [{
-									from: \"". $active[$l]->change_date ."\",
-									to: \"". $active[$l+1]->change_date ."\",
-									// label: \"Requisdrement Gathering\",
-									customClass: \"ganttRed\"
-								}]";		
-							echo "},";
-						}
-					}
-				}
-				?>
-				],
-				navigate: "scroll",
-				maxScale: "hours",
-				itemsPerPage: 10,
-				onItemClick: function(data) {
-					alert("Item clicked - show some details");
-				},
-				onAddClick: function(dt, rowId) {
-					alert("Empty space clicked - add an item!");
-				},
-				onRender: function() {
-					if (window.console && typeof console.log === "function") {
-						console.log("chart rendered");
-					}
-				}
-			});
-
-			$(".gantt").popover({
-				selector: ".bar",
-				title: "I'm a popover",
-				content: "And I'm the content of said popover.",
-				trigger: "hover"
-			});
-
-			prettyPrint();
-
-		});
-		
-	(function ($, undefined) {
+//
+/*jshint shadow:true, laxbreak:true, jquery:true, strict:true, trailing:true */
+(function ($, undefined) {
 
     "use strict";
 
@@ -394,7 +320,6 @@ should you have any questions.</p>
             // Create and return the left panel with labels
             leftPanel: function (element) {
                 /* Left panel */
-				
                 var ganttLeftPanel = $('<div class="leftPanel"/>')
                     .append($('<div class="row spacer"/>')
                     .css("height", tools.getCellSize() * element.headerRows + "px")
@@ -402,24 +327,18 @@ should you have any questions.</p>
 
                 var entries = [];
                 $.each(element.data, function (i, entry) {
-					<?php $well = Well::model()->findAll();
-					for($i=0;$i<count($well = Well::model()->findAll());$i++){?>
-						if(i == <?php echo $i?>){
-							if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
-								entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
-								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo json_encode($well[$i]->name)?> + '</span>');
-								
-								entries.push('</div>');
-																					
-								if (entry.desc) {
-									entries.push('<div class="row desc row' + i + ' " id="RowdId_' + i + '" data-id="' + entry.id + '">');
-									entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' + entry.desc + '</span>');
-									entries.push('</div>');
-								}
+                    if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
+                        entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
+                        entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' + entry.name + '</span>');
+                        entries.push('</div>');
 
-							}
-						}							
-					<?php }?>
+                        if (entry.desc) {
+                            entries.push('<div class="row desc row' + i + ' " id="RowdId_' + i + '" data-id="' + entry.id + '">');
+                            entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' + entry.desc + '</span>');
+                            entries.push('</div>');
+                        }
+
+                    }
                 });
                 ganttLeftPanel.append(entries.join(""));
                 return ganttLeftPanel;
@@ -522,7 +441,6 @@ should you have any questions.</p>
                 // Setup the headings based on the chosen `settings.scale`
                 switch (settings.scale) {
                     // **Hours**
-					
                     case "hours":
 
                         range = tools.parseTimeRange(element.dateStart, element.dateEnd, element.scaleStep);
@@ -1227,15 +1145,6 @@ should you have any questions.</p>
 
                                     var top = tools.getCellSize() * 4 + 2 + parseInt(topEl.attr("offset"), 10);
 									// alert(top);
-									// alert(element.data[i].name);
-									<?php $count = count(Well::model()->findAll());
-									$well = Well::model()->findAll();
-									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
-											top = <?php echo $j?>*24+98;
-										}
-									<?php }?>
-									
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
@@ -1861,7 +1770,3 @@ should you have any questions.</p>
 
     };
 })(jQuery);
-
-  </script>
-
-  
