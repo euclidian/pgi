@@ -75,6 +75,7 @@ class LeaseController extends Controller
 		if(isset($_POST['Lease']))
 		{
 			$model->attributes=$_POST['Lease'];
+			$model->last_update = date("Y-m-d");
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_lease));
 		}
@@ -99,6 +100,7 @@ class LeaseController extends Controller
 		if(isset($_POST['Lease']))
 		{
 			$model->attributes=$_POST['Lease'];
+			$model->last_update = date("Y-m-d");
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_lease));
 		}

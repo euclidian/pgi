@@ -75,6 +75,7 @@ class WellController extends Controller
 		if(isset($_POST['Well']))
 		{
 			$model->attributes=$_POST['Well'];
+			$model->last_update = date("Y-m-d");
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -99,6 +100,7 @@ class WellController extends Controller
 		if(isset($_POST['Well']))
 		{
 			$model->attributes=$_POST['Well'];
+			$model->last_update = date("Y-m-d");
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
