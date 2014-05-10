@@ -61,12 +61,12 @@ $this->pageTitle=Yii::app()->name;
 				],
 				navigate: "scroll",
 				maxScale: "hours",
-				itemsPerPage: 10,
+				itemsPerPage: 100000000000000000000000000000000000000,
 				onItemClick: function(data) {
-					alert("Item clicked - show some details");
+					// alert("Item clicked - show some details");
 				},
 				onAddClick: function(dt, rowId) {
-					alert("Empty space clicked - add an item!");
+					// alert("Empty space clicked - add an item!");
 				},
 				onRender: function() {
 					if (window.console && typeof console.log === "function") {
