@@ -32,12 +32,12 @@ class LeaseController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('admin'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('create','update','delete'),
+				'users'=>Yii::app()->getModule('user')->getAdmins(),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -55,7 +55,7 @@ class LeaseController extends Controller
 		$model2->unsetAttributes();  // clear any default values
 		if(isset($_GET['AtributLease']))
 			$model2->attributes=$_GET['AtributLease'];
-
+			
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),'model2'=>$model2,
 		));
@@ -75,6 +75,7 @@ class LeaseController extends Controller
 		if(isset($_POST['Lease']))
 		{
 			$model->attributes=$_POST['Lease'];
+			$model->last_update = date("Y-m-d");
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_lease));
 		}
@@ -99,12 +100,18 @@ class LeaseController extends Controller
 		if(isset($_POST['Lease']))
 		{
 			$model->attributes=$_POST['Lease'];
+			$model->last_update = date("Y-m-d");
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_lease));
 		}
 
+		$model2=new AtributLease('search');		
+		$model2->unsetAttributes();  // clear any default values
+		if(isset($_GET['AtributLease']))
+			$model2->attributes=$_GET['AtributLease'];
+
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model,'model2'=>$model2,
 		));
 	}
 

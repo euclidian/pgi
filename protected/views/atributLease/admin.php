@@ -40,17 +40,37 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'atribut-lease-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'name',
-		'value',
-		'id_lease',
-		array(
-			'class'=>'CButtonColumn',
+<?php 
+if (Yii::app()->getModule('user')->isAdmin()) {
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'atribut-lease-grid',
+		'dataProvider'=>$model->search(),
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			'name',
+			'value',
+			'id_lease',
+			array(
+				'class'=>'CButtonColumn',
+			),
 		),
-	),
-)); ?>
+	)); 
+}else{
+		$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'atribut-lease-grid',
+		'dataProvider'=>$model->search(),
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			'name',
+			'value',
+			'id_lease',
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view}',
+			),
+		),
+	)); 
+}	
+?>

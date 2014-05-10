@@ -91,6 +91,23 @@ class AtributLease extends CActiveRecord
 		));
 	}
 
+	public function searchIDLease($id_lease)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('value',$this->value,true);
+		$criteria->compare('id_lease',$this->id_lease,true);
+		$criteria->addcondition('id_lease = ' . $id_lease);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 09, 2014 at 07:53 AM
+-- Generation Time: May 09, 2014 at 08:11 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -31,6 +31,8 @@ CREATE TABLE IF NOT EXISTS `tbl_active` (
   `id_well` int(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `change_date` date NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `production` decimal(65,0) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_well` (`id_well`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
@@ -39,15 +41,15 @@ CREATE TABLE IF NOT EXISTS `tbl_active` (
 -- Dumping data for table `tbl_active`
 --
 
-INSERT INTO `tbl_active` (`id`, `id_well`, `active`, `change_date`) VALUES
-(1, 2, 1, '2014-05-05'),
-(2, 2, 0, '2014-05-08'),
-(3, 3, 1, '2014-05-04'),
-(4, 3, 1, '2014-05-06'),
-(5, 2, 1, '2014-05-10'),
-(6, 2, 0, '2014-05-13'),
-(7, 2, 1, '2014-05-14'),
-(8, 2, 0, '2014-05-17');
+INSERT INTO `tbl_active` (`id`, `id_well`, `active`, `change_date`, `note`, `production`) VALUES
+(1, 2, 1, '2014-05-05', NULL, NULL),
+(2, 2, 0, '2014-05-08', NULL, NULL),
+(3, 3, 1, '2014-05-04', NULL, NULL),
+(4, 3, 1, '2014-05-06', NULL, NULL),
+(5, 2, 1, '2014-05-10', NULL, NULL),
+(6, 2, 0, '2014-05-13', NULL, NULL),
+(7, 2, 1, '2014-05-14', NULL, NULL),
+(8, 2, 0, '2014-05-17', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -96,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `tbl_atribut_well` (
 CREATE TABLE IF NOT EXISTS `tbl_lease` (
   `name` varchar(255) DEFAULT NULL,
   `id_lease` bigint(255) NOT NULL,
+  `last_update` date NOT NULL,
   PRIMARY KEY (`id_lease`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -103,10 +106,10 @@ CREATE TABLE IF NOT EXISTS `tbl_lease` (
 -- Dumping data for table `tbl_lease`
 --
 
-INSERT INTO `tbl_lease` (`name`, `id_lease`) VALUES
-('lease 1', 1),
-('dasd', 2),
-('asdasd', 12312);
+INSERT INTO `tbl_lease` (`name`, `id_lease`, `last_update`) VALUES
+('lease 1', 1, '0000-00-00'),
+('dasd', 2, '0000-00-00'),
+('asdasd', 12312, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -195,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `createtime`, `lastvisit`, `superuser`, `status`) VALUES
-(1, 'admin', '2e150ece3d6d6d3da8fe0f9ba3ecc0d1', 'webmaster@example.com', '3530c29b9f63ed1747e94b7c978d4f0b', 1261146094, 1399463086, 1, 1),
+(1, 'admin', '2e150ece3d6d6d3da8fe0f9ba3ecc0d1', 'webmaster@example.com', '3530c29b9f63ed1747e94b7c978d4f0b', 1261146094, 1399654164, 1, 1),
 (2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '099f825543f7850cc038b90aaff39fac', 1261146096, 1399463069, 0, 1),
 (3, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'guest@guest.guest', '3d463a0e8185578ebf78754987328a52', 1399463029, 1399463029, 0, 1);
 
@@ -210,9 +213,10 @@ CREATE TABLE IF NOT EXISTS `tbl_well` (
   `name` varchar(255) DEFAULT NULL,
   `api` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
-  `production` varchar(255) DEFAULT NULL,
+  `production` decimal(65,0) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
   `id_lease` bigint(255) NOT NULL,
+  `last_update` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_lease` (`id_lease`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -221,9 +225,9 @@ CREATE TABLE IF NOT EXISTS `tbl_well` (
 -- Dumping data for table `tbl_well`
 --
 
-INSERT INTO `tbl_well` (`id`, `name`, `api`, `active`, `production`, `note`, `id_lease`) VALUES
-(2, 'dasd', 'asd', 1, 'asd', 'das', 1),
-(3, 'sumur 1', 'asdasd', 1, 'adsada', 'asdad', 1);
+INSERT INTO `tbl_well` (`id`, `name`, `api`, `active`, `production`, `note`, `id_lease`, `last_update`) VALUES
+(2, 'dasd', 'asd', 1, 0, 'das', 1, '0000-00-00'),
+(3, 'sumur 1', 'asdasd', 1, 0, 'asdad', 1, '0000-00-00');
 
 --
 -- Constraints for dumped tables

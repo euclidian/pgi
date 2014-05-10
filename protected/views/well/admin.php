@@ -40,22 +40,56 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'well-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'name',
-		'api',
-		'active',
-		'production',
-		'note',
-		/*
-		'id_lease',
-		*/
-		array(
-			'class'=>'CButtonColumn',
+<?php
+if (Yii::app()->getModule('user')->isAdmin()) {
+	 $this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'well-grid',
+		'dataProvider'=>$model->search(),
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			'name',
+			'api',
+			'active',
+			'production',
+			'note',		
+			'id_lease',
+			'last_update',		
+			array(
+				'class'=>'CButtonColumn',
+			),
 		),
-	),
-)); ?>
+	)); 
+}else{
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'well-grid',
+		'dataProvider'=>$model->search(),
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			'name',
+			'api',
+			'active',
+			'production',
+			'note',		
+			'id_lease',
+			'last_update',		
+			array(
+				'class'=>'CButtonColumn',
+				'template'=>'{view}',
+				// 'buttons'=>array(
+					// 'view'=>array(
+						// 'url'=>'Yii::app()->createUrl("atributlease/view", array("id"=>$data->id))',
+					// ),
+					// 'update'=>array(
+						// 'url'=>'Yii::app()->createUrl("atributlease/update", array("id"=>$data->id))',
+					// ),
+					// 'delete'=>array(
+						// 'url'=>'Yii::app()->createUrl("atributlease/delete", array("id"=>$data->id))',
+					// ),
+				// ),
+			),
+		),
+	)); 
+}
+?>

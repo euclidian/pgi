@@ -11,8 +11,10 @@
  * @property string $production
  * @property string $note
  * @property string $id_lease
+ * @property string $last_update
  *
  * The followings are the available model relations:
+ * @property Active[] $actives
  * @property AtributLease[] $atributLeases
  * @property AtributWell[] $atributWells
  * @property Lease $idLease
@@ -35,12 +37,13 @@ class Well extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('active, id_lease', 'required'),
+			array('active, id_lease, last_update', 'required'),
 			array('active', 'numerical', 'integerOnly'=>true),
-			array('name, api, production, note, id_lease', 'length', 'max'=>255),
+			array('name, api, note, id_lease', 'length', 'max'=>255),
+			array('production', 'length', 'max'=>65),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, api, active, production, note, id_lease', 'safe', 'on'=>'search'),
+			array('id, name, api, active, production, note, id_lease, last_update', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +55,7 @@ class Well extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'actives' => array(self::HAS_MANY, 'Active', 'id_well'),
 			'atributLeases' => array(self::HAS_MANY, 'AtributLease', 'id_lease'),
 			'atributWells' => array(self::HAS_MANY, 'AtributWell', 'id_well'),
 			'idLease' => array(self::BELONGS_TO, 'Lease', 'id_lease'),
@@ -71,6 +75,7 @@ class Well extends CActiveRecord
 			'production' => 'Production',
 			'note' => 'Note',
 			'id_lease' => 'Id Lease',
+			'last_update' => 'Last Update',
 		);
 	}
 
@@ -99,6 +104,7 @@ class Well extends CActiveRecord
 		$criteria->compare('production',$this->production,true);
 		$criteria->compare('note',$this->note,true);
 		$criteria->compare('id_lease',$this->id_lease,true);
+		$criteria->compare('last_update',$this->last_update,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

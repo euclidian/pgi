@@ -25,5 +25,7 @@ $this->menu=array(
 		'id_well',
 		'active',
 		'change_date',
+		'note',
+		'production',
 	),
 )); ?>

@@ -40,7 +40,26 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php 
+if (Yii::app()->getModule('user')->isAdmin()) {
+	$this->widget('zii.widgets.grid.CGridView', array(
+		'id'=>'active-grid',
+		'dataProvider'=>$model->search(),
+		'filter'=>$model,
+		'columns'=>array(
+			'id',
+			'id_well',
+			'active',
+			'change_date',
+			'note',
+			'production',
+			array(
+				'class'=>'CButtonColumn',
+			),
+		),
+	));
+}else{
+	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'active-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -49,8 +68,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id_well',
 		'active',
 		'change_date',
+		'note',
+		'production',
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{view}',
 		),
 	),
-)); ?>
+));
+}
+?>

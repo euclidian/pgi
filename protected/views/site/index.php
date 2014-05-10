@@ -5,21 +5,6 @@ $this->pageTitle=Yii::app()->name;
 ?>
 <link href="css/style.css" type="text/css" rel="stylesheet">
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
-
 <div class="contain">
 	<div class="gantt"></div>
 </div>
@@ -36,12 +21,11 @@ should you have any questions.</p>
 			$(".gantt").gantt({
 				source: [
 				<?php 
-				$wellModel = Well::model()->findAll();
-				
+				$wellModel = Well::model()->findAll();				
 				for($k=0;$k<count($wellModel);$k++){
 					$active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
 					for($l=0;$l<count($active)-1;$l++){
-						if($active[$l]->active == 1){	
+						if($active[$l]->active == 1){								
 							echo "{";
 								echo "name: \"".$wellModel[$k]->name."\",";
 							
@@ -49,7 +33,9 @@ should you have any questions.</p>
 									from: \"". $active[$l]->change_date ."\",
 									to: \"". $active[$l+1]->change_date ."\",
 									// label: \"Requisdrement Gathering\",
-									customClass: \"ganttBlue\"
+									label: \"". $active[$l+1]->production ."\",
+									customClass: \"ganttBlue\",
+									dataObj: {myTitle: '" . $active[$l+1]->production . "', myContent: 'some content'}
 								}]";									
 							echo "},";
 						}else{
@@ -60,22 +46,24 @@ should you have any questions.</p>
 									from: \"". $active[$l]->change_date ."\",
 									to: \"". $active[$l+1]->change_date ."\",
 									// label: \"Requisdrement Gathering\",
-									customClass: \"ganttRed\"
+									label: \"". $active[$l+1]->note ."\",
+									customClass: \"ganttRed\",
+									dataObj: {myTitle: '" . $active[$l+1]->note . "', myContent: 'some content'}
 								}]";		
 							echo "},";
 						}
 					}
 				}
-				?>
+			echo '
 				],
 				navigate: "scroll",
 				maxScale: "hours",
-				itemsPerPage: 10,
+				itemsPerPage: 100000000000000000000000000000000000000,
 				onItemClick: function(data) {
-					alert("Item clicked - show some details");
+					// alert("Item clicked - show some details");
 				},
 				onAddClick: function(dt, rowId) {
-					alert("Empty space clicked - add an item!");
+					// alert("Empty space clicked - add an item!");
 				},
 				onRender: function() {
 					if (window.console && typeof console.log === "function") {
@@ -83,14 +71,26 @@ should you have any questions.</p>
 					}
 				}
 			});
-
-			$(".gantt").popover({
-				selector: ".bar",
-				title: "I'm a popover",
-				content: "And I'm the content of said popover.",
-				trigger: "hover"
-			});
-
+			';
+			echo '
+			$(".gantt").popover({';
+			
+					
+					// $active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
+					$active = Active::model()->findAll();
+					echo
+					'selector: ".bar",
+					// title: "'. 'element.title' .'",					
+					title: function() {
+						return $(this).data(\'dataObj\').myTitle;
+					},
+					// content: "And Im the content of said popover.",
+					trigger: "hover"
+					';
+			
+			echo '});';
+			
+			?>
 			prettyPrint();
 
 		});

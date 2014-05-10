@@ -21,5 +21,13 @@
 	<?php echo CHtml::encode($data->change_date); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('note')); ?>:</b>
+	<?php echo CHtml::encode($data->note); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('production')); ?>:</b>
+	<?php echo CHtml::encode($data->production); ?>
+	<br />
+
 
 </div>

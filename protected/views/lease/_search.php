@@ -21,6 +21,11 @@
 		<?php echo $form->textField($model,'id_lease',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'last_update'); ?>
+		<?php echo $form->textField($model,'last_update'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

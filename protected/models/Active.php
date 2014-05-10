@@ -8,6 +8,8 @@
  * @property integer $id_well
  * @property integer $active
  * @property string $change_date
+ * @property string $note
+ * @property string $production
  *
  * The followings are the available model relations:
  * @property Well $idWell
@@ -32,9 +34,11 @@ class Active extends CActiveRecord
 		return array(
 			array('id_well, active, change_date', 'required'),
 			array('id_well, active', 'numerical', 'integerOnly'=>true),
+			array('note', 'length', 'max'=>255),
+			array('production', 'length', 'max'=>65),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, id_well, active, change_date', 'safe', 'on'=>'search'),
+			array('id, id_well, active, change_date, note, production', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +64,8 @@ class Active extends CActiveRecord
 			'id_well' => 'Id Well',
 			'active' => 'Active',
 			'change_date' => 'Change Date',
+			'note' => 'Note',
+			'production' => 'Production',
 		);
 	}
 
@@ -85,6 +91,8 @@ class Active extends CActiveRecord
 		$criteria->compare('id_well',$this->id_well);
 		$criteria->compare('active',$this->active);
 		$criteria->compare('change_date',$this->change_date,true);
+		$criteria->compare('note',$this->note,true);
+		$criteria->compare('production',$this->production,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
