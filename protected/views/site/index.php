@@ -21,13 +21,11 @@ $this->pageTitle=Yii::app()->name;
 			$(".gantt").gantt({
 				source: [
 				<?php 
-				$wellModel = Well::model()->findAll();
-				$list = array();
+				$wellModel = Well::model()->findAll();				
 				for($k=0;$k<count($wellModel);$k++){
 					$active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
 					for($l=0;$l<count($active)-1;$l++){
-						if($active[$l]->active == 1){	
-							array_push($list,$active[$l]->note);
+						if($active[$l]->active == 1){								
 							echo "{";
 								echo "name: \"".$wellModel[$k]->name."\",";
 							
@@ -41,7 +39,6 @@ $this->pageTitle=Yii::app()->name;
 								}]";									
 							echo "},";
 						}else{
-							array_push($list,$active[$l]->note);
 							echo "{";
 								echo "name: \"".$wellModel[$k]->name."\",";
 							
