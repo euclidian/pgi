@@ -37,11 +37,12 @@ should you have any questions.</p>
 				source: [
 				<?php 
 				$wellModel = Well::model()->findAll();
-				
+				$list = array();
 				for($k=0;$k<count($wellModel);$k++){
 					$active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
 					for($l=0;$l<count($active)-1;$l++){
 						if($active[$l]->active == 1){	
+							array_push($list,$active[$l]->note);
 							echo "{";
 								echo "name: \"".$wellModel[$k]->name."\",";
 							
@@ -49,10 +50,13 @@ should you have any questions.</p>
 									from: \"". $active[$l]->change_date ."\",
 									to: \"". $active[$l+1]->change_date ."\",
 									// label: \"Requisdrement Gathering\",
-									customClass: \"ganttBlue\"
+									label: \"". $active[$l+1]->production ."\",
+									customClass: \"ganttBlue\",
+									dataObj: {myTitle: '" . $active[$l+1]->production . "', myContent: 'some content'}
 								}]";									
 							echo "},";
 						}else{
+							array_push($list,$active[$l]->note);
 							echo "{";
 								echo "name: \"".$wellModel[$k]->name."\",";
 							
@@ -60,13 +64,15 @@ should you have any questions.</p>
 									from: \"". $active[$l]->change_date ."\",
 									to: \"". $active[$l+1]->change_date ."\",
 									// label: \"Requisdrement Gathering\",
-									customClass: \"ganttRed\"
+									label: \"". $active[$l+1]->note ."\",
+									customClass: \"ganttRed\",
+									dataObj: {myTitle: '" . $active[$l+1]->note . "', myContent: 'some content'}
 								}]";		
 							echo "},";
 						}
 					}
 				}
-				?>
+			echo '
 				],
 				navigate: "scroll",
 				maxScale: "hours",
@@ -83,14 +89,26 @@ should you have any questions.</p>
 					}
 				}
 			});
-
-			$(".gantt").popover({
-				selector: ".bar",
-				title: "I'm a popover",
-				content: "And I'm the content of said popover.",
-				trigger: "hover"
-			});
-
+			';
+			echo '
+			$(".gantt").popover({';
+			
+					
+					// $active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
+					$active = Active::model()->findAll();
+					echo
+					'selector: ".bar",
+					// title: "'. 'element.title' .'",					
+					title: function() {
+						return $(this).data(\'dataObj\').myTitle;
+					},
+					// content: "And Im the content of said popover.",
+					trigger: "hover"
+					';
+			
+			echo '});';
+			
+			?>
 			prettyPrint();
 
 		});
