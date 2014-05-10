@@ -33,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'active'); ?>
-		<?php echo $form->dropDownList($model,'active',array('0','1'));?>		
+		<?php echo $form->checkBox($model,'active'); ?>	
 		<?php echo $form->error($model,'active'); ?>
 	</div>
 
