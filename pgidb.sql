@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 11, 2014 at 12:10 PM
+-- Generation Time: May 12, 2014 at 08:08 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `tbl_active` (
   `production` decimal(65,0) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_well` (`id_well`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `tbl_active`
@@ -64,7 +64,9 @@ INSERT INTO `tbl_active` (`id`, `id_well`, `active`, `change_date`, `note`, `pro
 (26, 19, 1, '2014-05-10', 'dsa', 21),
 (27, 19, 1, '2014-05-10', 'dsa', 21),
 (28, 23, 0, '2014-05-10', 'cata', 123),
-(29, 23, 0, '2014-05-12', 'wah', 333);
+(29, 23, 0, '2014-05-12', 'wah', 333),
+(30, 22, 1, '2014-05-11', 'sda', 2),
+(31, 2, 1, '2014-05-11', 'das', 0);
 
 -- --------------------------------------------------------
 
@@ -86,8 +88,8 @@ CREATE TABLE IF NOT EXISTS `tbl_atribut_lease` (
 --
 
 INSERT INTO `tbl_atribut_lease` (`id`, `name`, `value`, `id_lease`) VALUES
-(1, 'at1', '1', 1),
-(3, 'dsa', 'das', 1);
+(1, 'at1', '1', 4),
+(3, 'dsa', 'das', 4);
 
 -- --------------------------------------------------------
 
@@ -102,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `tbl_atribut_well` (
   `id_well` int(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_well` (`id_well`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tbl_atribut_well`
@@ -111,7 +113,9 @@ CREATE TABLE IF NOT EXISTS `tbl_atribut_well` (
 INSERT INTO `tbl_atribut_well` (`id`, `name`, `value`, `id_well`) VALUES
 (1, 'well 3', '3', 3),
 (2, 'atrw2', 'ds', 2),
-(3, 'dsa', 'ads', 3);
+(3, 'dsa', 'ads', 3),
+(4, 'asdas', '212', 2),
+(5, 'asdasds', 'ads', 2);
 
 -- --------------------------------------------------------
 
@@ -121,10 +125,10 @@ INSERT INTO `tbl_atribut_well` (`id`, `name`, `value`, `id_well`) VALUES
 
 CREATE TABLE IF NOT EXISTS `tbl_lease` (
   `name` varchar(255) DEFAULT NULL,
-  `id_lease` bigint(255) NOT NULL AUTO_INCREMENT,
+  `id_lease` bigint(255) NOT NULL,
   `last_update` date NOT NULL,
   PRIMARY KEY (`id_lease`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12316 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_lease`
@@ -228,7 +232,7 @@ INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `activkey`, `cre
 (1, 'admin', '2e150ece3d6d6d3da8fe0f9ba3ecc0d1', 'webmaster@example.com', '3530c29b9f63ed1747e94b7c978d4f0b', 1261146094, 1399724492, 1, 1),
 (2, 'demo', 'fe01ce2a7fbac8fafaed7c982a04e229', 'demo@example.com', '099f825543f7850cc038b90aaff39fac', 1261146096, 1399708564, 0, 1),
 (3, 'guest', '084e0343a0486ff05530df6c705c8bb4', 'guest@guest.guest', '3d463a0e8185578ebf78754987328a52', 1399463029, 1399722541, 0, 1),
-(4, 'jooo', 'd1737fc340086b50c9061f79dffd7a53', 'jo@example.com', '4d904ec4169588be3b3b31852c9164e2', 1399722143, 1399725410, 1, 1),
+(4, 'jooo', 'd1737fc340086b50c9061f79dffd7a53', 'jo@example.com', '4d904ec4169588be3b3b31852c9164e2', 1399722143, 1399913531, 1, 1),
 (5, 'coba', 'c3ec0f7b054e729c5a716c8125839829', 'coba@ex.com', 'cd834a90c5d02bc1fa8d95e598ca473d', 1399724818, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -255,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `tbl_well` (
 --
 
 INSERT INTO `tbl_well` (`id`, `name`, `api`, `active`, `production`, `note`, `id_lease`, `last_update`) VALUES
-(2, 'dasd', 'asd', 1, 0, 'das', 1, '2014-05-09'),
+(2, 'dasd', 'asd', 1, 0, 'das', 2, '2014-05-11'),
 (3, 'sumur 1', 'asdasd', 0, 0, 'asdad', 1, '2014-05-10'),
 (4, 'w6', 'asdsad', 1, 22, 'asdasda', 1, '2014-05-10'),
 (5, 'w5', 'asd', 1, 2, 'asdas', 1, '2014-05-10'),
@@ -263,7 +267,7 @@ INSERT INTO `tbl_well` (`id`, `name`, `api`, `active`, `production`, `note`, `id
 (19, 'das', 'sad', 1, 21, 'dsa', 1, '2014-05-10'),
 (20, 'w20', 'das', 0, 1, 'ssad', 1, '2014-05-09'),
 (21, 'sdfsdf', 'sasd', 1, 1, 'das', 1, '2014-05-09'),
-(22, 'dsa', 'dsa', 1, 2, 'sda', 1, '2014-05-09'),
+(22, 'dsa', 'dsa', 1, 2, 'sda', 4, '2014-05-11'),
 (23, 'cobacoba', 'asdasd', 0, 123, 'cata', 12315, '2014-05-10');
 
 --

@@ -20,6 +20,7 @@ $this->menu=array(
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
+	// 'cssFile' => false,
 	'attributes'=>array(
 		'id',
 		'name',
@@ -40,8 +41,9 @@ Attributes
 if (Yii::app()->getModule('user')->isAdmin()) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'atribut-lease-grid',
+		'cssFile' => false,
 		'dataProvider'=>$model2->searchIDWell($model->id),
-		'filter'=>$model2,
+		// 'filter'=>$model2,
 		// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 		'columns'=>array(
 			// 'id',
@@ -77,7 +79,8 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'atribut-lease-grid',
 	'dataProvider'=>$model2->searchIDWell($model->id),
-	'filter'=>$model2,
+	'cssFile' => false,
+	// 'filter'=>$model2,
 	// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
 		// 'id',
@@ -106,4 +109,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 }	
 ?>
 
-<?php echo CHtml::Link('Create new attribute',array('atributwell/create')); ?> 
+<br/>
+<div style="margin-left: -140px;">
+	<?php echo CHtml::Button('Create new attribute',array('submit'=>array('atributwell/create','idwell'=>$model->id))) ?> 
+</div>

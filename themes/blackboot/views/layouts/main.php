@@ -33,6 +33,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/gridview.css" />
 <!-- Le fav and touch icons -->
 </head>
 
@@ -87,60 +88,15 @@
 	</div><!--/.fluid-container-->
 	</div>
 	
-	<div class="extra">
-	  <div class="container">
-		<div class="row">
-			<div class="col-md-3">
-				<h4>Heading 1</h4>
-				<ul>
-					<li><a href="#">Subheading 1.1</a></li>
-					<li><a href="#">Subheading 1.2</a></li>
-					<li><a href="#">Subheading 1.3</a></li>
-					<li><a href="#">Subheading 1.4</a></li>
-				</ul>
-			</div> <!-- /span3 -->
-			
-			<div class="col-md-3">
-				<h4>Heading 2</h4>
-				<ul>
-					<li><a href="#">Subheading 2.1</a></li>
-					<li><a href="#">Subheading 2.2</a></li>
-					<li><a href="#">Subheading 2.3</a></li>
-					<li><a href="#">Subheading 2.4</a></li>
-				</ul>
-			</div> <!-- /span3 -->
-			
-			<div class="col-md-3">
-				<h4>Heading 3</h4>	
-				<ul>
-					<li><a href="#">Subheading 3.1</a></li>
-					<li><a href="#">Subheading 3.2</a></li>
-					<li><a href="#">Subheading 3.3</a></li>
-					<li><a href="#">Subheading 3.4</a></li>
-				</ul>
-			</div> <!-- /span3 -->
-			
-			<div class="col-md-3">
-				<h4>Heading 4</h4>
-				<ul>
-					<li><a href="#">Subheading 4.1</a></li>
-					<li><a href="#">Subheading 4.2</a></li>
-					<li><a href="#">Subheading 4.3</a></li>
-					<li><a href="#">Subheading 4.4</a></li>
-				</ul>
-				</div> <!-- /span3 -->
-			</div> <!-- /row -->
-		</div> <!-- /container -->
-	</div>
 	
 	<div class="footer">
 	  <div class="container">
 		<div class="row">
 			<div id="footer-copyright" class="col-md-6">
-				About us | Contact us | Terms & Conditions
+				
 			</div> <!-- /span6 -->
 			<div id="footer-terms" class="col-md-6">
-				© 2012-13 Black Bootstrap. <a href="http://nachi.me.pn" target="_blank">Nachi</a>.
+				
 			</div> <!-- /.span6 -->
 		 </div> <!-- /row -->
 	  </div> <!-- /container -->

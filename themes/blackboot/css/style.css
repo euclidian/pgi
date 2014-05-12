@@ -127,8 +127,9 @@ label {
 }
 
 div.row {
-margin-right: -15px;
-margin-left: -15px;	
+margin-right: 0px;
+margin-left: 0px;	
+padding-right: 40px;
 }
 
 form input,select,textarea { float:left; }

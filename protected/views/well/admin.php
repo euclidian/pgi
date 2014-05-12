@@ -28,10 +28,11 @@ $('.search-form form').submit(function(){
 
 <h1>Manage Wells</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<div style="margin-left: -140px;">
+<?php echo CHtml::Button('Create new well',array('submit'=>array('well/create'))); ?> 
+</div>
+
+<br/>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -45,7 +46,8 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 	 $this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'well-grid',
 		'dataProvider'=>$model->search(),
-		'filter'=>$model,
+		// 'filter'=>$model,
+		'cssFile' => false,
 		'columns'=>array(
 			'id',
 			'name',
@@ -64,7 +66,8 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'well-grid',
 		'dataProvider'=>$model->search(),
-		'filter'=>$model,
+		// 'filter'=>$model,
+		'cssFile' => false,
 		'columns'=>array(
 			'id',
 			'name',

@@ -29,8 +29,8 @@ class Lease extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('last_update', 'required'),
-			array('name', 'length', 'max'=>255),
+			array('id_lease, last_update', 'required'),
+			array('name, id_lease', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name, id_lease, last_update', 'safe', 'on'=>'search'),
