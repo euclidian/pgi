@@ -30,7 +30,17 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		if (!Yii::app()->user->isGuest) {
-			$this->render('index');
+			
+			if(isset($_POST['pilihanlease'])) {
+				$pilihanlease = $_POST['pilihanlease'];
+			}else{
+				$pilihanlease = "dasd";
+			}
+			$wellModel = Well::model()->findAll("id_lease = '" . $pilihanlease . "'");
+			// $wellModel = Well::model()->findAll();
+			$this->render('index', array(
+				'wellModel'=>$wellModel,'pilihanlease'=>$pilihanlease,
+			));
 		}else{
 			$this->redirect(array("/user/login"));
 		}

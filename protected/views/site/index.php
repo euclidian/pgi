@@ -5,10 +5,21 @@ $this->pageTitle=Yii::app()->name;
 ?>
 <link href="css/style.css" type="text/css" rel="stylesheet">
 
+<br/><br/>
+
+<?php echo CHtml::beginForm();?>	
+	<?php echo CHtml::label('Lease','lease'); ?>
+	<?php echo CHtml::dropDownList('pilihanlease',$pilihanlease,CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'));?>
+	<?php echo CHtml::submitButton('Show chart'); ?>
+<?php echo CHtml::endForm();?>
+
+<br/>
+
 <div class="contain">
 	<div class="gantt"></div>
 </div>
 
+	
 <script src="js/jquery.min.js"></script>
 
 <script src="js/bootstrap.min.js"></script>
@@ -21,7 +32,7 @@ $this->pageTitle=Yii::app()->name;
 			$(".gantt").gantt({
 				source: [
 				<?php 
-				$wellModel = Well::model()->findAll();				
+				// $wellModel = Well::model()->findAll('name = ' . $pilihanlease);				
 				for($k=0;$k<count($wellModel);$k++){
 					$active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
 					for($l=0;$l<count($active)-1;$l++){
@@ -402,12 +413,12 @@ $this->pageTitle=Yii::app()->name;
 
                 var entries = [];
                 $.each(element.data, function (i, entry) {
-					<?php $well = Well::model()->findAll();
-					for($i=0;$i<count($well = Well::model()->findAll());$i++){?>
+					<?php
+					for($i=0;$i<count($wellModel);$i++){?>
 						if(i == <?php echo $i?>){
 							if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
 								entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
-								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo json_encode($well[$i]->name)?> + '</span>');
+								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo json_encode($wellModel[$i]->name)?> + '</span>');
 								
 								entries.push('</div>');
 																					
