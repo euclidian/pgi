@@ -31,6 +31,9 @@ class Lease extends CActiveRecord
 		return array(
 			array('id_lease, last_update', 'required'),
 			array('name, id_lease', 'length', 'max'=>255),
+			array('id_lease', 'unique', 'className' => 'Lease',
+				'attributeName' => 'id_lease',
+				'message'=>'This id is already in use'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name, id_lease, last_update', 'safe', 'on'=>'search'),
