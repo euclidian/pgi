@@ -3,12 +3,12 @@
 /* @var $model Well */
 
 $this->breadcrumbs=array(
-	'Wells'=>array('index'),
+	'Wells'=>array('admin'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Well', 'url'=>array('index')),
+	array('label'=>'List Well', 'url'=>array('admin')),
 	array('label'=>'Create Well', 'url'=>array('create')),
 );
 
