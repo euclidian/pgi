@@ -35,7 +35,7 @@ class SiteController extends Controller
 				$pilihanlease = $_POST['pilihanlease'];
 			}else{
 				$lease = Lease::model()->findAll();
-				if($lease !==null){	
+				if($lease !=null){	
 					$pilihanlease = $lease[0]->id_lease;
 				}else{
 					$pilihanlease = "";
