@@ -1128,11 +1128,12 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 5 + 2 + parseInt(topEl.attr("offset"), 10);
+									// alert(top+"hour");
 									<?php $count = count(Well::model()->findAll());
 									$well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
 										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
-											top = <?php echo $j?>*24+98;
+											top = <?php echo $j?>*24+122;
 										}
 									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
@@ -1178,6 +1179,7 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 3 + 2 + parseInt(topEl.attr("offset"), 10);
+									// alert(top+"week");
 									<?php $count = count(Well::model()->findAll());
 									$well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
@@ -1225,6 +1227,7 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 2 + 2 + parseInt(topEl.attr("offset"), 10);
+									// alert(top+"month");
 									<?php $count = count(Well::model()->findAll());
 									$well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
@@ -1258,7 +1261,7 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 4 + 2 + parseInt(topEl.attr("offset"), 10);
-									// alert(top);
+									// alert(top+"day");
 									// alert(element.data[i].name);
 									<?php $count = count(Well::model()->findAll());
 									$well = Well::model()->findAll();
