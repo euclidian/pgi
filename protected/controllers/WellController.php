@@ -69,6 +69,7 @@ class WellController extends Controller
 	{
 		$model=new Well;
 		$active = new Active;
+		$active2 = new Active;
 		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -83,7 +84,12 @@ class WellController extends Controller
 				$active->change_date = $model->last_update;
 				$active->note = $model->note;
 				$active->production = $model->production;
-				if($active->save())
+				$active2->id_well = $model->id;
+				$active2->active = $model->active;
+				$active2->change_date = $model->last_update;
+				$active2->note = $model->note;
+				$active2->production = $model->production;
+				if($active->save() && $active2->save())
 					$this->redirect(array('view','id'=>$model->id));
 			}
 		}
