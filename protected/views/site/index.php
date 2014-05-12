@@ -69,7 +69,7 @@ $this->pageTitle=Yii::app()->name;
 				],
 				navigate: "scroll",
 				maxScale: "hours",
-				itemsPerPage: 100000000000000000000000000000000000000,
+				itemsPerPage: 1000000000000000000000000000000000000000000,
 				onItemClick: function(data) {
 					// alert("Item clicked - show some details");
 				},
@@ -1128,6 +1128,13 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 5 + 2 + parseInt(topEl.attr("offset"), 10);
+									<?php $count = count(Well::model()->findAll());
+									$well = Well::model()->findAll();
+									for($j=0; $j<$count;$j++){ ?>
+										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+											top = <?php echo $j?>*24+98;
+										}
+									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
@@ -1171,6 +1178,13 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 3 + 2 + parseInt(topEl.attr("offset"), 10);
+									<?php $count = count(Well::model()->findAll());
+									$well = Well::model()->findAll();
+									for($j=0; $j<$count;$j++){ ?>
+										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+											top = <?php echo $j?>*24+98;
+										}
+									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
@@ -1211,6 +1225,13 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 2 + 2 + parseInt(topEl.attr("offset"), 10);
+									<?php $count = count(Well::model()->findAll());
+									$well = Well::model()->findAll();
+									for($j=0; $j<$count;$j++){ ?>
+										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+											top = <?php echo $j?>*24+98;
+										}
+									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
