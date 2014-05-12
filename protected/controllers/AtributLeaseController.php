@@ -64,8 +64,8 @@ class AtributLeaseController extends Controller
 	{
 		$model=new AtributLease;
 
-		if(isset($_GET['idlease'])){
-			$model->id_lease = $_GET['idlease'];
+		if(isset($_GET['id_lease'])){
+			$model->id_lease = $_GET['id_lease'];
 		}
 		
 		// Uncomment the following line if AJAX validation is needed

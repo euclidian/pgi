@@ -27,7 +27,8 @@ Attributes
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'atribut-lease-grid',
 	'dataProvider'=>$model2->searchIDLease($model->id_lease),
-	'filter'=>$model2,
+	// 'filter'=>$model2,
+	'cssFile' => false,
 	// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
 		'id',
@@ -60,4 +61,8 @@ Attributes
 	'emptyText'=>'',
 )); ?>
 
-<?php echo CHtml::Link('Create new attribute',array('atributlease/create')); ?> 
+
+<br/>
+<div style="margin-left: -140px;">
+	<?php echo CHtml::Button('Create new attribute',array('submit'=>array('atributlease/create','id_lease'=>$model->id_lease))) ?> 
+</div>

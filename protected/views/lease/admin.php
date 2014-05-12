@@ -64,7 +64,8 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'lease-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	'cssFile' => false,
+	// 'filter'=>$model,
 	'columns'=>array(
 		'name',
 		'id_lease',
