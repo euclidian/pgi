@@ -75,7 +75,7 @@ class AtributLeaseController extends Controller
 		{
 			$model->attributes=$_POST['AtributLease'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('lease/update','id'=>$model->id_lease));
 		}
 
 		$this->render('create',array(

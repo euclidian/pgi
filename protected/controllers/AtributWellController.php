@@ -75,7 +75,7 @@ class AtributWellController extends Controller
 			$model->attributes=$_POST['AtributWell'];
 			// $model->id_well = $_GET['idwell'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('well/update','id'=>$model->id_well));
 		}
 
 		$this->render('create',array(

@@ -29,7 +29,11 @@ $('.search-form form').submit(function(){
 <h1>Manage Leases</h1>
 
 <div style="margin-left: -140px;">
-<?php echo CHtml::Button('Create new lease',array('submit'=>array('lease/create'))); ?> 
+<?php 
+	if (Yii::app()->getModule('user')->isAdmin()) {
+		echo CHtml::Button('Create new lease',array('submit'=>array('lease/create'))); 
+	}
+?> 
 </div>
 
 <br/>

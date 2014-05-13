@@ -111,5 +111,9 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 
 <br/>
 <div style="margin-left: -140px;">
-	<?php echo CHtml::Button('Create new attribute',array('submit'=>array('atributwell/create','idwell'=>$model->id))) ?> 
+	<?php 
+		if (Yii::app()->getModule('user')->isAdmin()) {
+			echo CHtml::Button('Create new attribute',array('submit'=>array('atributwell/create','idwell'=>$model->id))) ;
+		}
+	?> 
 </div>

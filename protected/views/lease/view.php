@@ -112,5 +112,9 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 
 <br/>
 <div style="margin-left: -140px;">
-	<?php echo CHtml::Button('Create new attribute',array('submit'=>array('atributlease/create','id_lease'=>$model->id_lease))) ?> 
+	<?php 
+		if (Yii::app()->getModule('user')->isAdmin()) {
+			echo CHtml::Button('Create new attribute',array('submit'=>array('atributlease/create','id_lease'=>$model->id_lease))) ;
+		}
+	?> 
 </div>
