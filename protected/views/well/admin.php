@@ -28,8 +28,13 @@ $('.search-form form').submit(function(){
 
 <h1>Manage Wells</h1>
 
+
 <div style="margin-left: -140px;">
-<?php echo CHtml::Button('Create new well',array('submit'=>array('well/create'))); ?> 
+<?php 
+	if (Yii::app()->getModule('user')->isAdmin()) {
+		echo CHtml::Button('Create new well',array('submit'=>array('well/create'))); 
+	}
+?> 
 </div>
 
 <br/>
