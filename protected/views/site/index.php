@@ -35,33 +35,63 @@ $this->pageTitle=Yii::app()->name;
 				// $wellModel = Well::model()->findAll('name = ' . $pilihanlease);				
 				for($k=0;$k<count($wellModel);$k++){
 					$active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
-					for($l=0;$l<count($active)-1;$l++){
-						if($active[$l]->active == 1){								
-							echo "{";
-								echo "name: \"".$wellModel[$k]->name."\",";
-							
-								echo "values: [{
-									from: \"". $active[$l]->change_date ."\",
-									to: \"". $active[$l+1]->change_date ."\",
-									// label: \"Requisdrement Gathering\",
-									label: \"". $active[$l+1]->production ."\",
-									customClass: \"ganttBlue\",
-									dataObj: {myTitle: '" . $active[$l+1]->production . "', myContent: 'some content'}
-								}]";									
-							echo "},";
+					for($l=0;$l<count($active);$l++){
+						if($active[$l]->active == 1){	
+							if($l+1 == count($active)){
+								echo "{";
+									echo "name: \"".$wellModel[$k]->name."\",";
+								
+									echo "values: [{
+										from: \"". $active[$l]->change_date ."\",
+										to: \"". $active[$l]->change_date ."\",
+										// label: \"Requisdrement Gathering\",
+										// label: \"". $active[$l]->production ."\",
+										customClass: \"ganttBlue\",
+										dataObj: {myTitle: '" . $active[$l]->production . "', myContent: 'some content'}
+									}]";		
+								echo "},";
+							}else{
+								echo "{";
+									echo "name: \"".$wellModel[$k]->name."\",";
+								
+									echo "values: [{
+										from: \"". $active[$l]->change_date ."\",
+										to: \"". $active[$l+1]->change_date ."\",
+										// label: \"Requisdrement Gathering\",
+										// label: \"". $active[$l]->production ."\",
+										customClass: \"ganttBlue\",
+										dataObj: {myTitle: '" . $active[$l]->production . "', myContent: 'some content'}
+									}]";									
+								echo "},";							
+							}
 						}else{
-							echo "{";
-								echo "name: \"".$wellModel[$k]->name."\",";
-							
-								echo "values: [{
-									from: \"". $active[$l]->change_date ."\",
-									to: \"". $active[$l+1]->change_date ."\",
-									// label: \"Requisdrement Gathering\",
-									label: \"". $active[$l+1]->note ."\",
-									customClass: \"ganttRed\",
-									dataObj: {myTitle: '" . $active[$l+1]->note . "', myContent: 'some content'}
-								}]";		
-							echo "},";
+							if($l+1 == count($active)){
+								echo "{";
+									echo "name: \"".$wellModel[$k]->name."\",";
+								
+									echo "values: [{
+										from: \"". $active[$l]->change_date ."\",
+										to: \"". $active[$l]->change_date ."\",
+										// label: \"Requisdrement Gathering\",
+										// label: \"". $active[$l]->note ."\",
+										customClass: \"ganttRed\",
+										dataObj: {myTitle: '" . $active[$l]->note . "', myContent: 'some content'}
+									}]";		
+								echo "},";
+							}else{
+								echo "{";
+									echo "name: \"".$wellModel[$k]->name."\",";
+								
+									echo "values: [{
+										from: \"". $active[$l]->change_date ."\",
+										to: \"". $active[$l+1]->change_date ."\",
+										// label: \"Requisdrement Gathering\",
+										// label: \"". $active[$l]->note ."\",
+										customClass: \"ganttRed\",
+										dataObj: {myTitle: '" . $active[$l]->note . "', myContent: 'some content'}
+									}]";		
+								echo "},";							
+							}
 						}
 					}
 				}
@@ -69,7 +99,7 @@ $this->pageTitle=Yii::app()->name;
 				],
 				navigate: "scroll",
 				maxScale: "hours",
-				itemsPerPage: 100000000000000000000000000000000000000,
+				itemsPerPage: 1000000000000000000000000000000000000000000,
 				onItemClick: function(data) {
 					// alert("Item clicked - show some details");
 				},
@@ -1128,6 +1158,14 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 5 + 2 + parseInt(topEl.attr("offset"), 10);
+									// alert(top+"hour");
+									<?php $count = count(Well::model()->findAll());
+									$well = Well::model()->findAll();
+									for($j=0; $j<$count;$j++){ ?>
+										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+											top = <?php echo $j?>*24+122;
+										}
+									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
@@ -1171,6 +1209,14 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 3 + 2 + parseInt(topEl.attr("offset"), 10);
+									// alert(top+"week");
+									<?php $count = count(Well::model()->findAll());
+									$well = Well::model()->findAll();
+									for($j=0; $j<$count;$j++){ ?>
+										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+											top = <?php echo $j?>*24+98;
+										}
+									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
@@ -1211,6 +1257,14 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 2 + 2 + parseInt(topEl.attr("offset"), 10);
+									// alert(top+"month");
+									<?php $count = count(Well::model()->findAll());
+									$well = Well::model()->findAll();
+									for($j=0; $j<$count;$j++){ ?>
+										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+											top = <?php echo $j?>*24+98;
+										}
+									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
                                     datapanel.append(_bar);
@@ -1237,7 +1291,7 @@ $this->pageTitle=Yii::app()->name;
                                     var topEl = $(element).find("#rowheader" + i);
 
                                     var top = tools.getCellSize() * 4 + 2 + parseInt(topEl.attr("offset"), 10);
-									// alert(top);
+									// alert(top+"day");
 									// alert(element.data[i].name);
 									<?php $count = count(Well::model()->findAll());
 									$well = Well::model()->findAll();

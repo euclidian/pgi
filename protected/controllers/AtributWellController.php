@@ -63,13 +63,17 @@ class AtributWellController extends Controller
 	public function actionCreate()
 	{
 		$model=new AtributWell;
-
+		
+		if(isset($_GET['idwell'])){
+			$model->id_well = $_GET['idwell'];
+		}
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['AtributWell']))
 		{
 			$model->attributes=$_POST['AtributWell'];
+			// $model->id_well = $_GET['idwell'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

@@ -34,7 +34,12 @@ class SiteController extends Controller
 			if(isset($_POST['pilihanlease'])) {
 				$pilihanlease = $_POST['pilihanlease'];
 			}else{
-				$pilihanlease = "dasd";
+				$lease = Lease::model()->findAll();
+				if($lease !=null){	
+					$pilihanlease = $lease[0]->id_lease;
+				}else{
+					$pilihanlease = "";
+				}
 			}
 			$wellModel = Well::model()->findAll("id_lease = '" . $pilihanlease . "'");
 			// $wellModel = Well::model()->findAll();

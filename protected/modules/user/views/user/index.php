@@ -13,6 +13,7 @@ $this->breadcrumbs=array(
 } ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
+	'cssFile' => false,
 	'columns'=>array(
 		array(
 			'name' => 'username',

@@ -3,7 +3,7 @@
 /* @var $model AtributWell */
 
 $this->breadcrumbs=array(
-	'Atribut Wells'=>array('index'),
+	'Atribut Wells'=>array('admin'),
 	'Manage',
 );
 

@@ -40,6 +40,9 @@ class Well extends CActiveRecord
 			array('active, id_lease, last_update', 'required'),
 			array('active', 'numerical', 'integerOnly'=>true),
 			array('name, api, note, id_lease', 'length', 'max'=>255),
+			array('name', 'unique', 'className' => 'Well',
+				'attributeName' => 'name',
+				'message'=>'This name is already in use'),
 			array('production', 'length', 'max'=>65),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

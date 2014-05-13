@@ -3,7 +3,7 @@
 /* @var $model Active */
 
 $this->breadcrumbs=array(
-	'Actives'=>array('index'),
+	'Actives'=>array('admin'),
 	'Manage',
 );
 

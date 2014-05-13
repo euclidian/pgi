@@ -3,7 +3,7 @@
 /* @var $model AtributLease */
 
 $this->breadcrumbs=array(
-	'Atribut Leases'=>array('index'),
+	'Atribut Leases'=>array('admin'),
 	'Manage',
 );
 

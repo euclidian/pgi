@@ -3,7 +3,7 @@
 /* @var $model Lease */
 
 $this->breadcrumbs=array(
-	'Leases'=>array('index'),
+	'Leases'=>array('admin'),
 	'Manage',
 );
 
@@ -28,10 +28,11 @@ $('.search-form form').submit(function(){
 
 <h1>Manage Leases</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<div style="margin-left: -140px;">
+<?php echo CHtml::Button('Create new lease',array('submit'=>array('lease/create'))); ?> 
+</div>
+
+<br/>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -45,12 +46,16 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'lease-grid',
 		'dataProvider'=>$model->search(),
-		'filter'=>$model,
+		// 'filter'=>$model,
+		// 'pager' => array('cssFile' => Yii::app()->baseUrl . '/themes/blackboot/css/gridview.css'),
+		// 'cssFile' => Yii::app()->baseUrl . '/themes/blackboot/css/gridview.css',
+		'cssFile' => false,
 		'columns'=>array(
 			'name',
 			'id_lease',
 			'last_update',
 			array(
+				'header' => 'Actions',
 				'class'=>'CButtonColumn',
 			),
 		),
@@ -59,7 +64,8 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'lease-grid',
 	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	'cssFile' => false,
+	// 'filter'=>$model,
 	'columns'=>array(
 		'name',
 		'id_lease',
