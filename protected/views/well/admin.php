@@ -27,7 +27,13 @@ $('.search-form form').submit(function(){
 ?>
 
 <h1>Manage Wells</h1>
+<?php echo CHtml::beginForm();?>	
+	<?php echo CHtml::dropDownList('pilihanlease',$pilihanlease,CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'),array('empty'=>'Show All','onchange'=>'submit()'));?>
+<?php echo CHtml::endForm();?>
 
+<br/>
+<br/>
+<br/>
 
 <div style="margin-left: -140px;">
 <?php 
@@ -39,7 +45,11 @@ $('.search-form form').submit(function(){
 
 <br/>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<div style="margin-left: -140px;">
+	<?php echo CHtml::Button('Search',array('class'=>'search-button')); ?>
+</div>
+
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -47,12 +57,20 @@ $('.search-form form').submit(function(){
 </div><!-- search-form -->
 
 <?php
+// $dataProvider = new CActiveDataProvider($model, array(
+	// 'pagination'=>array(
+			// 'pageSize'=>3,
+	// ),
+// ));
 if (Yii::app()->getModule('user')->isAdmin()) {
 	 $this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'well-grid',
-		'dataProvider'=>$model->search(),
+		'dataProvider'=>$model->search2($pilihanlease),
+		// 'dataProvider'=>$dataProvider,
+		// 'ajaxUpdate'=>false,
 		// 'filter'=>$model,
-		'cssFile' => false,
+		// 'enableHistory' => true,
+		'cssFile' => false,		
 		'columns'=>array(
 			// 'id',
 			'name',
@@ -60,7 +78,14 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 			'active',
 			'production',
 			'note',		
-			'id_lease',
+			// 'id_lease',
+			'idLease.name',
+			// array(
+            // 'name'=>'id_lease',
+            // 'value'=>'$data->id_lease',
+            // 'filter'=>Chtml::listData(Lease::model()->findAll(),'id_lease','id_lease'),
+            // ),
+        
 			'last_update',		
 			array(
 				'class'=>'CButtonColumn',
@@ -70,7 +95,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 }else{
 	$this->widget('zii.widgets.grid.CGridView', array(
 		'id'=>'well-grid',
-		'dataProvider'=>$model->search(),
+		'dataProvider'=>$model->search2($pilihanlease),
 		// 'filter'=>$model,
 		'cssFile' => false,
 		'columns'=>array(
@@ -80,7 +105,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 			'active',
 			'production',
 			'note',		
-			'id_lease',
+			'idLease.name',
 			'last_update',		
 			array(
 				'class'=>'CButtonColumn',

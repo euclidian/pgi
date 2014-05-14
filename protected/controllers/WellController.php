@@ -164,13 +164,28 @@ class WellController extends Controller
 	 */
 	public function actionAdmin()
 	{
+	
 		$model=new Well('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Well']))
+		
+		if(isset($_POST['pilihanlease'])) {
+			$pilihanlease = $_POST['pilihanlease'];		
+			Yii::app()->user->setState('pillease', $_POST['pilihanlease']);			
+		}else{				
+			$pilihanlease = "";			
+			$searchParams = Yii::app()->user->getState('pillease');
+                if ( isset($searchParams) )
+                {
+                        $pilihanlease = $searchParams;
+                }
+		}
+			
+		if(isset($_GET['Well'])){
 			$model->attributes=$_GET['Well'];
+		}
 
 		$this->render('admin',array(
-			'model'=>$model,
+			'model'=>$model,'pilihanlease'=>$pilihanlease,
 		));
 	}
 

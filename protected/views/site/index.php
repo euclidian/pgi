@@ -8,11 +8,10 @@ $this->pageTitle=Yii::app()->name;
 <br/><br/>
 
 <?php echo CHtml::beginForm();?>	
-	<?php echo CHtml::label('Lease','lease'); ?>
-	<?php echo CHtml::dropDownList('pilihanlease',$pilihanlease,CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'));?>
-	<?php echo CHtml::submitButton('Show chart'); ?>
+	<?php echo CHtml::dropDownList('pilihanlease',$pilihanlease,CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'),array('empty'=>'Show All','onchange'=>'submit()'));?>
 <?php echo CHtml::endForm();?>
 
+	
 <br/>
 
 <div class="contain">
@@ -118,7 +117,7 @@ $this->pageTitle=Yii::app()->name;
 			
 					
 					// $active = Active::model()->findAll('id_well = ' . $wellModel[$k]->id);
-					$active = Active::model()->findAll();
+					// $active = Active::model()->findAll();
 					echo
 					'selector: ".bar",
 					// title: "'. 'element.title' .'",					
@@ -1159,10 +1158,10 @@ $this->pageTitle=Yii::app()->name;
 
                                     var top = tools.getCellSize() * 5 + 2 + parseInt(topEl.attr("offset"), 10);
 									// alert(top+"hour");
-									<?php $count = count(Well::model()->findAll());
-									$well = Well::model()->findAll();
+									<?php $count = count($wellModel);
+									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
 											top = <?php echo $j?>*24+122;
 										}
 									<?php }?>
@@ -1210,10 +1209,10 @@ $this->pageTitle=Yii::app()->name;
 
                                     var top = tools.getCellSize() * 3 + 2 + parseInt(topEl.attr("offset"), 10);
 									// alert(top+"week");
-									<?php $count = count(Well::model()->findAll());
-									$well = Well::model()->findAll();
+									<?php $count = count($wellModel);
+									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
 											top = <?php echo $j?>*24+98;
 										}
 									<?php }?>
@@ -1258,10 +1257,10 @@ $this->pageTitle=Yii::app()->name;
 
                                     var top = tools.getCellSize() * 2 + 2 + parseInt(topEl.attr("offset"), 10);
 									// alert(top+"month");
-									<?php $count = count(Well::model()->findAll());
-									$well = Well::model()->findAll();
+									<?php $count = count($wellModel);
+									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
 											top = <?php echo $j?>*24+98;
 										}
 									<?php }?>
@@ -1293,10 +1292,9 @@ $this->pageTitle=Yii::app()->name;
                                     var top = tools.getCellSize() * 4 + 2 + parseInt(topEl.attr("offset"), 10);
 									// alert(top+"day");
 									// alert(element.data[i].name);
-									<?php $count = count(Well::model()->findAll());
-									$well = Well::model()->findAll();
+									<?php $count = count($wellModel);									
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($well[$j]->name); ?>){
+										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
 											top = <?php echo $j?>*24+98;
 										}
 									<?php }?>
