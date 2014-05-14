@@ -54,7 +54,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 		// 'filter'=>$model,
 		'cssFile' => false,
 		'columns'=>array(
-			'id',
+			// 'id',
 			'name',
 			'api',
 			'active',
@@ -74,7 +74,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 		// 'filter'=>$model,
 		'cssFile' => false,
 		'columns'=>array(
-			'id',
+			// 'id',
 			'name',
 			'api',
 			'active',

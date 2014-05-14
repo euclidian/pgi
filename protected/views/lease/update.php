@@ -31,7 +31,7 @@ Attributes
 	'cssFile' => false,
 	// 'selectionChanged'=>"function(id){window.location='" . Yii::app()->createUrl("site/detailpengadaan", array("id"=>"$model->id_pengadaan")) . "'+ $.fn.yiiGridView.getSelection(id);}",
 	'columns'=>array(
-		'id',
+		// 'id',
 		'name',
 		'value',
 		'id_lease',
