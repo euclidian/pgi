@@ -38,7 +38,11 @@ $('.search-form form').submit(function(){
 
 <br/>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php //echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<div style="margin-left: -140px;">
+	<?php echo CHtml::Button('Search',array('class'=>'search-button')); ?>
+</div>
+
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
