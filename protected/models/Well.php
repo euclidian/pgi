@@ -113,6 +113,26 @@ class Well extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function search2($idlease)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('api',$this->api,true);
+		$criteria->compare('active',$this->active);
+		$criteria->compare('production',$this->production,true);
+		$criteria->compare('note',$this->note,true);
+		$criteria->compare('id_lease',$idlease,true);
+		$criteria->compare('last_update',$this->last_update,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 
 	/**
 	 * Returns the static model of the specified AR class.
