@@ -8,9 +8,7 @@ $this->pageTitle=Yii::app()->name;
 <br/><br/>
 
 <?php echo CHtml::beginForm();?>	
-	<?php echo CHtml::label('Lease','lease'); ?>
-	<?php echo CHtml::dropDownList('pilihanlease',$pilihanlease,CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'),array('empty'=>'Show All'));?>
-	<?php echo CHtml::submitButton('Show chart'); ?>
+	<?php echo CHtml::dropDownList('pilihanlease',$pilihanlease,CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'),array('empty'=>'Show All','onchange'=>'submit()'));?>
 <?php echo CHtml::endForm();?>
 
 	
