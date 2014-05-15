@@ -38,26 +38,27 @@ $this->pageTitle=Yii::app()->name;
 						if($active[$l]->active == 1){	
 							if($l+1 == count($active)){
 								echo "{";
-									echo "name: \"".$wellModel[$k]->name."\",";
+									// echo "name: \"".$wellModel[$k]->name."\",";
+									echo "name: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease . ")") ."\",";
 								
 									echo "values: [{
 										from: \"". $active[$l]->change_date ."\",
 										to: \"". date("Y-m-d") ."\",
 										// label: \"Requisdrement Gathering\",
-										// label: \"". $active[$l]->production ."\",
+										// label: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease  . ")") ."\",
 										customClass: \"ganttBlue\",
 										dataObj: {myTitle: '" . $active[$l]->production . "', myContent: 'some content'}
 									}]";		
 								echo "},";
 							}else{
 								echo "{";
-									echo "name: \"".$wellModel[$k]->name."\",";
+									echo "name: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease . ")") ."\",";
 								
 									echo "values: [{
 										from: \"". $active[$l]->change_date ."\",
 										to: \"". $active[$l+1]->change_date ."\",
 										// label: \"Requisdrement Gathering\",
-										// label: \"". $active[$l]->production ."\",
+										// label: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease  . ")") ."\",
 										customClass: \"ganttBlue\",
 										dataObj: {myTitle: '" . $active[$l]->production . "', myContent: 'some content'}
 									}]";									
@@ -66,26 +67,26 @@ $this->pageTitle=Yii::app()->name;
 						}else{
 							if($l+1 == count($active)){
 								echo "{";
-									echo "name: \"".$wellModel[$k]->name."\",";
+									echo "name: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease . ")") ."\",";
 								
 									echo "values: [{
 										from: \"". $active[$l]->change_date ."\",
 										to: \"". date("Y-m-d") ."\",
 										// label: \"Requisdrement Gathering\",
-										// label: \"". $active[$l]->note ."\",
+										// label: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease  . ")") ."\",
 										customClass: \"ganttRed\",
 										dataObj: {myTitle: '" . $active[$l]->note . "', myContent: 'some content'}
 									}]";		
 								echo "},";
 							}else{
 								echo "{";
-									echo "name: \"".$wellModel[$k]->name."\",";
+									echo "name: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease . ")") ."\",";
 								
 									echo "values: [{
 										from: \"". $active[$l]->change_date ."\",
 										to: \"". $active[$l+1]->change_date ."\",
 										// label: \"Requisdrement Gathering\",
-										// label: \"". $active[$l]->note ."\",
+										// label: \"". (($pilihanlease !== "") ? $wellModel[$k]->name : $wellModel[$k]->name . " (" . $wellModel[$k]->id_lease  . ")") ."\",
 										customClass: \"ganttRed\",
 										dataObj: {myTitle: '" . $active[$l]->note . "', myContent: 'some content'}
 									}]";		
@@ -447,7 +448,7 @@ $this->pageTitle=Yii::app()->name;
 						if(i == <?php echo $i?>){
 							if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
 								entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
-								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo json_encode($wellModel[$i]->name)?> + '</span>');
+								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo (($pilihanlease !== "") ? json_encode($wellModel[$i]->name) : json_encode($wellModel[$i]->name . " (" . $wellModel[$i]->idLease->name . ")"))?> + '</span>');
 								
 								entries.push('</div>');
 																					
@@ -1161,7 +1162,7 @@ $this->pageTitle=Yii::app()->name;
 									<?php $count = count($wellModel);
 									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
+										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
 											top = <?php echo $j?>*24+122;
 										}
 									<?php }?>
@@ -1212,7 +1213,7 @@ $this->pageTitle=Yii::app()->name;
 									<?php $count = count($wellModel);
 									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
+										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
 											top = <?php echo $j?>*24+98;
 										}
 									<?php }?>
@@ -1260,7 +1261,7 @@ $this->pageTitle=Yii::app()->name;
 									<?php $count = count($wellModel);
 									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
+										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
 											top = <?php echo $j?>*24+98;
 										}
 									<?php }?>
@@ -1294,7 +1295,7 @@ $this->pageTitle=Yii::app()->name;
 									// alert(element.data[i].name);
 									<?php $count = count($wellModel);									
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo json_encode($wellModel[$j]->name); ?>){
+										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
 											top = <?php echo $j?>*24+98;
 										}
 									<?php }?>

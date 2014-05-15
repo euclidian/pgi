@@ -40,9 +40,18 @@ class Well extends CActiveRecord
 			array('active, id_lease, last_update', 'required'),
 			array('active', 'numerical', 'integerOnly'=>true),
 			array('name, api, note, id_lease', 'length', 'max'=>255),
-			array('name', 'unique', 'className' => 'Well',
-				'attributeName' => 'name',
-				'message'=>'This name is already in use'),
+			// array('name', 'unique', 'className' => 'Well',
+				// 'attributeName' => 'name',
+				// 'message'=>'This name is already in use'),
+			// array('name', 'unique', 'criteria'=>array(
+					// 'condition'=>'id_lease=:id_lease',
+					// 'params'=>array(
+						// ':id_lease'=>$this->id_lease
+					// ),),
+				// 'message'=>'This name is already in use'
+			// ),
+			 array('name, id_lease', 'ECompositeUniqueValidator'),
+        
 			array('production', 'length', 'max'=>65),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -144,5 +153,9 @@ class Well extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+	
+	public function getStringActive(){
+		return ($this->active === "0") ? 'not active' : 'active';
 	}
 }
