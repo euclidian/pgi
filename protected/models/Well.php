@@ -145,4 +145,8 @@ class Well extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	public function getStringActive(){
+		return ($this->active === "0") ? 'not active' : 'active';
+	}
 }

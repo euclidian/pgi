@@ -25,7 +25,11 @@ $this->menu=array(
 		// 'id',
 		'name',
 		'api',
-		'active',
+		// 'active',
+		array(
+			'label'=>'Active',
+			'value'=>$model->getStringActive(),
+		),
 		'production',
 		'note',
 		'idLease.name',
