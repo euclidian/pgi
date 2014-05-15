@@ -79,6 +79,7 @@ class Well extends CActiveRecord
 			'note' => 'Note',
 			'id_lease' => 'Id Lease',
 			'last_update' => 'Last Update',
+			'idLease.name' => 'Lease',
 		);
 	}
 

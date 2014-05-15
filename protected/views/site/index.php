@@ -42,7 +42,7 @@ $this->pageTitle=Yii::app()->name;
 								
 									echo "values: [{
 										from: \"". $active[$l]->change_date ."\",
-										to: \"". $active[$l]->change_date ."\",
+										to: \"". date("Y-m-d") ."\",
 										// label: \"Requisdrement Gathering\",
 										// label: \"". $active[$l]->production ."\",
 										customClass: \"ganttBlue\",
@@ -70,7 +70,7 @@ $this->pageTitle=Yii::app()->name;
 								
 									echo "values: [{
 										from: \"". $active[$l]->change_date ."\",
-										to: \"". $active[$l]->change_date ."\",
+										to: \"". date("Y-m-d") ."\",
 										// label: \"Requisdrement Gathering\",
 										// label: \"". $active[$l]->note ."\",
 										customClass: \"ganttRed\",

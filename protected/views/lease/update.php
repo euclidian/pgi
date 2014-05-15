@@ -34,7 +34,7 @@ Attributes
 		// 'id',
 		'name',
 		'value',
-		'id_lease',
+		// 'id_lease',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}{update}{delete}',

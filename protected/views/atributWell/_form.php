@@ -32,7 +32,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_well'); ?>
+		<?php echo $form->labelEx($model,'Well'); ?>
 		<?php echo $form->dropDownList($model,'id_well',CHtml::listData(Well::model()->findAll(), 'id', 'name'),array('empty'=>'-----Pilih Well-----'));?>
 		<?php echo $form->error($model,'id_well'); ?>
 	</div>

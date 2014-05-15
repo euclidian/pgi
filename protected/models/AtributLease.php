@@ -10,7 +10,7 @@
  * @property string $id_lease
  *
  * The followings are the available model relations:
- * @property Well $idLease
+ * @property Lease $idLease
  */
 class AtributLease extends CActiveRecord
 {
@@ -46,7 +46,7 @@ class AtributLease extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idLease' => array(self::BELONGS_TO, 'Well', 'id_lease'),
+			'idLease' => array(self::BELONGS_TO, 'Lease', 'id_lease'),
 		);
 	}
 
@@ -60,6 +60,7 @@ class AtributLease extends CActiveRecord
 			'name' => 'Name',
 			'value' => 'Value',
 			'id_lease' => 'Id Lease',
+			'idLease.name' => 'Lease',
 		);
 	}
 
