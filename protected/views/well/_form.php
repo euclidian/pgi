@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_lease'); ?>
+		<?php echo $form->labelEx($model,'Lease'); ?>
 		<?php echo $form->dropDownList($model,'id_lease',CHtml::listData(Lease::model()->findAll(), 'id_lease', 'name'),array('empty'=>'-----Pilih Lease-----'));?>
 		<?php echo $form->error($model,'id_lease'); ?>
 	</div>	

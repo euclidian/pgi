@@ -61,6 +61,7 @@ class AtributWell extends CActiveRecord
 			'name' => 'Name',
 			'value' => 'Value',
 			'id_well' => 'Id Well',
+			'idWell.name' => 'Well',
 		);
 	}
 

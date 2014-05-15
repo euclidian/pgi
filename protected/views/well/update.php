@@ -34,7 +34,7 @@ Attributes
 		// 'id',
 		'name',
 		'value',
-		'id_well',
+		// 'id_well',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}{update}{delete}',

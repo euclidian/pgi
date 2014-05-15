@@ -22,13 +22,13 @@ $this->menu=array(
 	'data'=>$model,
 	// 'cssFile' => false,
 	'attributes'=>array(
-		'id',
+		// 'id',
 		'name',
 		'api',
 		'active',
 		'production',
 		'note',
-		'id_lease',
+		'idLease.name',
 		'last_update',
 	),
 )); ?>
@@ -49,7 +49,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 			// 'id',
 			'name',
 			'value',
-			'id_well',
+			// 'id_well',
 			array(
 				'class'=>'CButtonColumn',
 				'template'=>'{view}{update}{delete}',
@@ -86,7 +86,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 		// 'id',
 		'name',
 		'value',
-		'id_well',
+		// 'id_well',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',

@@ -43,7 +43,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 			// 'id',
 			'name',
 			'value',
-			'id_lease',
+			// 'id_lease',
 			array(
 				'class'=>'CButtonColumn',
 				'template'=>'{view}{update}{delete}',
@@ -80,7 +80,7 @@ if (Yii::app()->getModule('user')->isAdmin()) {
 		// 'id',
 		'name',
 		'value',
-		'id_lease',
+		// 'id_lease',
 		array(
 			'class'=>'CButtonColumn',
 			'template'=>'{view}',
