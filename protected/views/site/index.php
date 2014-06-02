@@ -449,7 +449,7 @@ $this->pageTitle=Yii::app()->name;
 						if(i == <?php echo $i?>){
 							if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
 								entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
-								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo (($pilihanlease !== "") ? json_encode($wellModel[$i]->name) : json_encode($wellModel[$i]->name . " (" . $wellModel[$i]->idLease->name . ")"))?> + '</span>');
+								entries.push('<a href="index.php?r=well/view&id=' + <?php echo json_encode($wellModel[$i]->id) ?> + '">' +<?php echo (($pilihanlease !== "") ? json_encode($wellModel[$i]->name) : json_encode($wellModel[$i]->name . " (" . $wellModel[$i]->idLease->name . ")"))?> + '</a>'); //nama well di panel kiri
 								
 								entries.push('</div>');
 																					
