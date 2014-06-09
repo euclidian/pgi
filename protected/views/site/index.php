@@ -99,7 +99,8 @@ $this->pageTitle=Yii::app()->name;
 				],
 				navigate: "scroll",
 				maxScale: "hours",
-				itemsPerPage: 1000000000000000000000000000000000000000000,
+				// itemsPerPage: 1000000000000000000000000000000000000000000,
+				itemsPerPage: 20,
 				onItemClick: function(data) {
 					// alert("Item clicked - show some details");
 				},
@@ -357,7 +358,7 @@ $this->pageTitle=Yii::app()->name;
             // Here we calculate the number of rows, pages and visible start
             // and end dates once the data is ready
             init: function (element) {
-                element.rowsNum = element.data.length;
+                element.rowsNum = <?php echo count($wellModel) ?>;
                 element.pageCount = Math.ceil(element.rowsNum / settings.itemsPerPage);
                 element.rowsOnLastPage = element.rowsNum - (Math.floor(element.rowsNum / settings.itemsPerPage) * settings.itemsPerPage);
 
@@ -448,7 +449,7 @@ $this->pageTitle=Yii::app()->name;
 						if(i == <?php echo $i?>){
 							if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
 								entries.push('<div class="row name row' + i + (entry.desc ? '' : ' fn-wide') + '" id="rowheader' + i + '" offset="' + i % settings.itemsPerPage * tools.getCellSize() + '">');
-								entries.push('<span class="fn-label' + (entry.cssClass ? ' ' + entry.cssClass : '') + '">' +<?php echo (($pilihanlease !== "") ? json_encode($wellModel[$i]->name) : json_encode($wellModel[$i]->name . " (" . $wellModel[$i]->idLease->name . ")"))?> + '</span>');
+								entries.push('<a href="index.php?r=well/view&id=' + <?php echo json_encode($wellModel[$i]->id) ?> + '">' +<?php echo (($pilihanlease !== "") ? json_encode($wellModel[$i]->name) : json_encode($wellModel[$i]->name . " (" . $wellModel[$i]->idLease->name . ")"))?> + '</a>'); //nama well di panel kiri
 								
 								entries.push('</div>');
 																					
@@ -1128,9 +1129,12 @@ $this->pageTitle=Yii::app()->name;
                 };
                 // Loop through the values of each data element and set a row
                 $.each(element.data, function (i, entry) {
-                    if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
+                    // if (i >= element.pageNum * settings.itemsPerPage && i < (element.pageNum * settings.itemsPerPage + settings.itemsPerPage)) {
+					// if (i >= element.pageNum * 100000000000000 && i < (element.pageNum * 100000000000000 + 100000000000000)) {
 
                         $.each(entry.values, function (j, day) {
+							// alert(element.pageNum);
+							// alert(i);
                             var _bar = null;
 
                             switch (settings.scale) {
@@ -1163,12 +1167,14 @@ $this->pageTitle=Yii::app()->name;
 									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
 										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
-											top = <?php echo $j?>*24+122;
+											top = <?php echo $j?>*24+122-element.pageNum*24*settings.itemsPerPage;
 										}
 									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
-
-                                    datapanel.append(_bar);
+						
+                                    if(top >= 122){		
+										datapanel.append(_bar);
+									}
                                     break;
 
                                 // **Weekly data**
@@ -1214,12 +1220,14 @@ $this->pageTitle=Yii::app()->name;
 									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
 										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
-											top = <?php echo $j?>*24+98;
+											top = <?php echo $j?>*24+98-element.pageNum*24*settings.itemsPerPage;
 										}
 									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
-
-                                    datapanel.append(_bar);
+									
+									if(top >= 98){		
+										datapanel.append(_bar);
+									}
                                     break;
 
                                 // **Monthly data**
@@ -1261,13 +1269,15 @@ $this->pageTitle=Yii::app()->name;
 									<?php $count = count($wellModel);
 									// $well = Well::model()->findAll();
 									for($j=0; $j<$count;$j++){ ?>
-										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
-											top = <?php echo $j?>*24+98;
+										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){											
+											top = <?php echo $j?>*24+98-element.pageNum*24*settings.itemsPerPage;
 										}
 									<?php }?>
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
-
-                                    datapanel.append(_bar);
+		
+									if(top >= 98){		
+										datapanel.append(_bar);
+									}
                                     break;
 
                                 // **Days**
@@ -1296,13 +1306,15 @@ $this->pageTitle=Yii::app()->name;
 									<?php $count = count($wellModel);									
 									for($j=0; $j<$count;$j++){ ?>
 										if(element.data[i].name == <?php echo (($pilihanlease !== "") ? json_encode($wellModel[$j]->name) : json_encode($wellModel[$j]->name . " (" . $wellModel[$j]->id_lease . ")")); ?>){
-											top = <?php echo $j?>*24+98;
+											top = <?php echo $j?>*24+98-element.pageNum*24*settings.itemsPerPage;
 										}
 									<?php }?>
 									
                                     _bar.css({ 'top': top, 'left': Math.floor(cFrom) });
 
-                                    datapanel.append(_bar);
+									if(top >= 98){																		
+										datapanel.append(_bar);
+									}
 
                                     break;
                             }
@@ -1315,7 +1327,7 @@ $this->pageTitle=Yii::app()->name;
                             }
                         });
 
-                    }
+                    // }
                 });
             },
             // **Navigation**
